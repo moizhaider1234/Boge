@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOGE – The Book of Doge | Solana</title>
+  <meta name="description" content="BOGE – The legendary Book of Doge. The most sacred memecoin on Solana. Much wow. Very crypto. Such gains." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers:wght@400&family=Nunito:wght@400;600;700;900&family=VT323&display=swap" rel="stylesheet" />
+
+  <!-- Twitter widgets -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <style>
+    :root {
+      --gold:    #F5C518;
+      --gold2:   #E8A000;
+      --dark:    #0A0A0A;
+      --darker:  #050505;
+      --tan:     #C8A96E;
+      --cream:   #FDF5DC;
+      --rust:    #C43D1D;
+      --green:   #00FF88;
+      --white:   #FFFFFF;
+      --shadow:  rgba(245,197,24,0.4);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── STAR FIELD ─── */
+    #stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0;
+      animation: twinkle var(--dur) ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0; transform: scale(0.5); }
+      50%      { opacity: var(--op); transform: scale(1); }
+    }
+
+    /* ─── SCROLLING DOGE TICKER ─── */
+    .ticker-wrap {
+      background: var(--gold);
+      overflow: hidden;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--gold2);
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+      padding: 10px 0;
+      font-family: 'VT323', monospace;
+      font-size: 1.4rem;
+      color: #000;
+      letter-spacing: 2px;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 40px;
+      left: 0; right: 0;
+      z-index: 99;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,197,24,0.2);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      animation: spin-slow 8s linear infinite;
+    }
+    @keyframes spin-slow {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .nav-logo-text {
+      font-family: 'Bangers', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-shadow: 0 0 20px var(--shadow);
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 120px 20px 60px;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,197,24,0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse-glow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse-glow {
+      0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%,-50%) scale(1.15); }
+    }
+
+    .hero-logo-wrap {
+      position: relative;
+      margin-bottom: 30px;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-18px); }
+    }
+    .hero-logo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 5px solid var(--gold);
+      box-shadow: 0 0 60px var(--shadow), 0 0 120px rgba(245,197,24,0.2);
+      object-fit: cover;
+      display: block;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      background: var(--rust);
+      color: #fff;
+      font-family: 'Bangers', cursive;
+      font-size: 1rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 2px;
+      border: 2px solid var(--gold);
+    }
+
+    h1.hero-title {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-shadow: 6px 6px 0 #000, 0 0 80px var(--shadow);
+      margin-bottom: 10px;
+      animation: title-in 1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes title-in {
+      from { opacity: 0; transform: translateY(40px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hero-subtitle {
+      font-family: 'VT323', monospace;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--tan);
+      letter-spacing: 4px;
+      margin-bottom: 30px;
+      animation: title-in 1.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      max-width: 560px;
+      line-height: 1.7;
+      color: rgba(253,245,220,0.8);
+      margin-bottom: 40px;
+      animation: title-in 1.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: title-in 1.6s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: 'Bangers', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn:hover::after { opacity: 1; }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--gold);
+      color: #000;
+      box-shadow: 0 0 30px var(--shadow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 50px var(--shadow);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+    }
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      background: rgba(245,197,24,0.1);
+    }
+    .btn-twitter {
+      background: #1DA1F2;
+      color: #fff;
+    }
+    .btn-twitter:hover { transform: translateY(-3px); }
+
+    /* ─── CA BOX ─── */
+    .ca-box {
+      margin-top: 40px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,197,24,0.3);
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: title-in 1.8s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .ca-label {
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    .ca-addr {
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      color: var(--tan);
+      letter-spacing: 1px;
+      word-break: break-all;
+    }
+    .copy-btn {
+      background: var(--gold);
+      border: none;
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-family: 'Bangers', cursive;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      color: #000;
+      transition: transform 0.15s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover { transform: scale(1.05); }
+    .copy-btn.copied { background: var(--green); color: #000; }
+
+    /* ─── SECTION SHARED ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 20px;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-tag {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: 4px;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .section-title span { color: var(--gold); }
+    .section-divider {
+      width: 80px;
+      height: 4px;
+      background: var(--gold);
+      margin-bottom: 50px;
+      border-radius: 2px;
+    }
+
+    /* ─── ABOUT / LORE ─── */
+    #about {
+      background: linear-gradient(180deg, var(--dark) 0%, #0D0900 100%);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 24px;
+      border: 3px solid var(--gold2);
+      box-shadow: 0 0 80px rgba(245,197,24,0.25);
+      display: block;
+      margin: 0 auto;
+      animation: float 8s ease-in-out infinite;
+    }
+    .lore-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .lore-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .lore-card:hover {
+      border-color: var(--gold);
+      background: rgba(245,197,24,0.05);
+    }
+    .lore-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .lore-card h3 {
+      font-family: 'Bangers', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .lore-card p {
+      font-size: 0.95rem;
+      color: rgba(253,245,220,0.7);
+      line-height: 1.6;
+    }
+
+    /* ─── STATS TICKER ─── */
+    #stats {
+      background: var(--gold);
+      padding: 60px 20px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: #000;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.6);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ─── HOW TO BUY ─── */
+    #how-to-buy {
+      background: #0D0900;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,197,24,0.15);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .step-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      box-shadow: 0 20px 60px rgba(245,197,24,0.15);
+    }
+    .step-num {
+      font-family: 'Bangers', cursive;
+      font-size: 3.5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .step-icon-lg { font-size: 2.5rem; margin-bottom: 12px; }
+    .step-card h3 {
+      font-family: 'Bangers', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .step-card p {
+      font-size: 0.9rem;
+      color: rgba(253,245,220,0.65);
+      line-height: 1.6;
+    }
+
+    /* ─── TOKENOMICS ─── */
+    #tokenomics {
+      background: linear-gradient(180deg, #0D0900 0%, #0A0A0A 100%);
+    }
+    .tokenomics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .token-chart-wrap {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+    }
+    .donut-svg { width: 100%; height: 100%; }
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .donut-center-val {
+      font-family: 'Bangers', cursive;
+      font-size: 2.2rem;
+      color: var(--gold);
+    }
+    .donut-center-label {
+      font-size: 0.75rem;
+      color: var(--tan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .token-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .token-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(245,197,24,0.1);
+      transition: border-color 0.2s;
+    }
+    .token-row:hover { border-color: var(--gold); }
+    .token-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .token-row-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--cream);
+      flex: 1;
+    }
+    .token-row-pct {
+      font-family: 'Bangers', cursive;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    /* ─── TWEETS ─── */
+    #tweets {
+      background: #0A0A0A;
+    }
+    .tweets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .tweet-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,197,24,0.15);
+      border-radius: 20px;
+      padding: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .tweet-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .tweet-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .tweet-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .tweet-name {
+      font-weight: 900;
+      color: var(--cream);
+      font-size: 0.95rem;
+    }
+    .tweet-handle {
+      color: var(--tan);
+      font-size: 0.85rem;
+    }
+    .tweet-x-logo {
+      margin-left: auto;
+      color: var(--cream);
+      opacity: 0.5;
+      font-size: 1.1rem;
+    }
+    .tweet-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: rgba(253,245,220,0.85);
+    }
+    .tweet-text a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .tweet-footer {
+      display: flex;
+      gap: 20px;
+      color: var(--tan);
+      font-size: 0.85rem;
+    }
+    .tweet-footer span { display: flex; align-items: center; gap: 4px; }
+    .tweet-date { margin-left: auto; font-size: 0.8rem; opacity: 0.5; }
+
+    /* ─── MEME GALLERY ─── */
+    #memes {
+      background: #0D0900;
+    }
+    .meme-scroll {
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) transparent;
+    }
+    .meme-row {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      padding: 10px 0;
+    }
+    .meme-item {
+      background: rgba(245,197,24,0.08);
+      border: 2px solid rgba(245,197,24,0.2);
+      border-radius: 16px;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .meme-item:hover {
+      transform: scale(1.08) rotate(2deg);
+      border-color: var(--gold);
+      box-shadow: 0 0 30px var(--shadow);
+    }
+    .meme-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      background: rgba(0,0,0,0.7);
+      padding: 6px;
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      text-align: center;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    /* ─── COMMUNITY ─── */
+    #community {
+      background: linear-gradient(135deg, #0A0500 0%, #0A0A0A 100%);
+      text-align: center;
+    }
+    .community-inner { max-width: 700px; margin: 0 auto; }
+    .community-logo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      margin: 0 auto 30px;
+      box-shadow: 0 0 60px var(--shadow);
+      object-fit: cover;
+      animation: float 6s ease-in-out infinite;
+      display: block;
+    }
+    .community-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--darker);
+      border-top: 1px solid rgba(245,197,24,0.15);
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(253,245,220,0.3);
+      position: relative;
+      z-index: 1;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ─── BOUNCING DOGES ─── */
+    .bouncer {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 2.5rem;
+      opacity: 0;
+      animation: bounce-fly var(--t) ease-out forwards;
+    }
+    @keyframes bounce-fly {
+      0%   { opacity: 1; transform: translateY(0) scale(1); }
+      80%  { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-120px) scale(0.5); }
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 10px 20px; }
+      .nav-links { display: none; }
+      .about-grid,
+      .tokenomics-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-img-wrap { order: -1; }
+      .ca-addr { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- STARS -->
+<div id="stars"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    🐕 BOGE TO THE MOON 🌕 &nbsp;&nbsp;&nbsp; MUCH WOW VERY BOGE &nbsp;&nbsp;&nbsp; 📖 THE BOOK OF DOGE IS WRITTEN &nbsp;&nbsp;&nbsp; $BOGE ON SOLANA &nbsp;&nbsp;&nbsp; 🐕 CA: 2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump &nbsp;&nbsp;&nbsp; SUCH GAINS VERY MOON 🌙 &nbsp;&nbsp;&nbsp; THE CHOSEN ONE HAS ARRIVED &nbsp;&nbsp;&nbsp; 🐕 BOGE TO THE MOON 🌕 &nbsp;&nbsp;&nbsp; MUCH WOW VERY BOGE &nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <img src="images/boge-logo.jpg" alt="BOGE" />
+    <span class="nav-logo-text">BOGE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Lore</a></li>
+    <li><a href="#how-to-buy">Buy</a></li>
+    <li><a href="#tokenomics">Tokenomics</a></li>
+    <li><a href="#tweets">Tweets</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-logo-wrap">
+    <img class="hero-logo" src="images/boge-logo.jpg" alt="BOGE Logo" />
+    <span class="hero-badge">ON SOLANA</span>
+  </div>
+
+  <h1 class="hero-title">BOGE</h1>
+  <p class="hero-subtitle">📖 THE BOOK OF DOGE &nbsp;·&nbsp; MUCH SACRED &nbsp;·&nbsp; VERY LEGENDARY</p>
+  <p class="hero-desc">
+    The ancient scrolls foretold of a dog who would bear the mark of the Bull. 
+    That dog is <strong>BOGE</strong>. Part meme. Part prophecy. All Solana.
+  </p>
+
+  <div class="btn-group">
+    <a class="btn btn-primary" href="https://dexscreener.com/solana/7apitysztd3qpd3r5fws9yjt6d3hcdt3xzggnyogvie8" target="_blank" rel="noopener">
+      📈 Buy on Dex
+    </a>
+    <a class="btn btn-secondary" href="https://pump.fun/coin/2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump" target="_blank" rel="noopener">
+      🚀 Pump.fun
+    </a>
+    <a class="btn btn-twitter" href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">
+      🐦 Follow
+    </a>
+  </div>
+
+  <div class="ca-box">
+    <span class="ca-label">CONTRACT:</span>
+    <span class="ca-addr" id="ca-text">2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump</span>
+    <button class="copy-btn" onclick="copyCA(this)">COPY CA</button>
+  </div>
+</section>
+
+<!-- ABOUT / LORE -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img class="about-img" src="images/boge-logo.jpg" alt="The Book of Doge" />
+      </div>
+      <div class="reveal">
+        <p class="section-tag">📜 The Sacred Lore</p>
+        <h2 class="section-title">WHO IS <span>BOGE?</span></h2>
+        <div class="section-divider"></div>
+        <div class="lore-cards">
+          <div class="lore-card">
+            <div class="lore-icon">📖</div>
+            <div>
+              <h3>THE PROPHECY</h3>
+              <p>Long before Bitcoin, long before Ethereum, the ancient Doge scribes carved the Book of Doge into golden tablets. BOGE was the chosen guardian — half Shiba, half legend.</p>
+            </div>
+          </div>
+          <div class="lore-card">
+            <div class="lore-icon">🐂</div>
+            <div>
+              <h3>THE BULL HORNS</h3>
+              <p>The horns represent eternal bullishness. BOGE never dips. BOGE never dumps. BOGE only ascends. The Book has spoken and cannot be unspoken.</p>
+            </div>
+          </div>
+          <div class="lore-card">
+            <div class="lore-icon">⚡</div>
+            <div>
+              <h3>BUILT ON SOLANA</h3>
+              <p>Lightning-fast, fees practically zero. The ancient dog chose wisely — where else would prophecy live but on the fastest chain in the cosmos?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num">1B</div>
+      <div class="stat-label">Total Supply</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">0%</div>
+      <div class="stat-label">Dev Tax</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Meme Power</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">🌕</div>
+      <div class="stat-label">Destination</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section id="how-to-buy">
+  <div class="section-inner">
+    <p class="section-tag reveal">🛒 Very Simple Steps</p>
+    <h2 class="section-title reveal">HOW TO <span>BUY BOGE</span></h2>
+    <div class="section-divider reveal"></div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon-lg">📱</div>
+        <h3>GET A WALLET</h3>
+        <p>Download <strong>Phantom</strong> or <strong>Solflare</strong> wallet on your phone or browser. It takes two minutes. You can do it, fren.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">02</div>
+        <div class="step-icon-lg">💰</div>
+        <h3>GET SOME SOL</h3>
+        <p>Buy SOL from <strong>Coinbase</strong>, <strong>Binance</strong> or any exchange. Send it to your Phantom wallet. The Book demands an offering.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">03</div>
+        <div class="step-icon-lg">🔄</div>
+        <h3>SWAP FOR BOGE</h3>
+        <p>Go to <strong>Jupiter</strong> or <strong>Raydium</strong>, paste the BOGE contract address, and swap your SOL. Set slippage to ~10% if needed.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">04</div>
+        <div class="step-icon-lg">🚀</div>
+        <h3>HOLD & ASCEND</h3>
+        <p>You are now part of the BOGE prophecy. Sit back, HODL, and watch the sacred book write your net worth into legend.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:50px;" class="reveal">
+      <div class="ca-box" style="display:inline-flex; max-width:100%;">
+        <span class="ca-label">CA:</span>
+        <span class="ca-addr">2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump</span>
+        <button class="copy-btn" onclick="copyCA(this)">COPY</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENOMICS -->
+<section id="tokenomics">
+  <div class="section-inner">
+    <p class="section-tag reveal">📊 The Sacred Numbers</p>
+    <h2 class="section-title reveal">TOKEN<span>OMICS</span></h2>
+    <div class="section-divider reveal"></div>
+    <div class="tokenomics-grid">
+      <div class="token-chart-wrap reveal">
+        <svg class="donut-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Community 50% -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#F5C518" stroke-width="30"
+            stroke-dasharray="219.9 219.9" stroke-dashoffset="0"
+            transform="rotate(-90 100 100)" />
+          <!-- Liquidity Pool 30% -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#E8A000" stroke-width="30"
+            stroke-dasharray="131.9 307.9"
+            stroke-dashoffset="-219.9"
+            transform="rotate(-90 100 100)" />
+          <!-- Dev & Marketing 20% -->
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#C8A96E" stroke-width="30"
+            stroke-dasharray="87.9 351.9"
+            stroke-dashoffset="-351.9"
+            transform="rotate(-90 100 100)" />
+          <circle cx="100" cy="100" r="55" fill="#0D0900" />
+        </svg>
+        <div class="donut-center">
+          <div class="donut-center-val">1B</div>
+          <div class="donut-center-label">TOTAL SUPPLY</div>
+        </div>
+      </div>
+      <div class="token-details reveal">
+        <div class="token-row">
+          <div class="token-dot" style="background:#F5C518;"></div>
+          <div class="token-row-label">Community / Public</div>
+          <div class="token-row-pct">50%</div>
+        </div>
+        <div class="token-row">
+          <div class="token-dot" style="background:#E8A000;"></div>
+          <div class="token-row-label">Liquidity Pool (Burned)</div>
+          <div class="token-row-pct">30%</div>
+        </div>
+        <div class="token-row">
+          <div class="token-dot" style="background:#C8A96E;"></div>
+          <div class="token-row-label">Dev & Marketing</div>
+          <div class="token-row-pct">20%</div>
+        </div>
+        <div class="token-row">
+          <div class="token-dot" style="background:#00FF88;"></div>
+          <div class="token-row-label">Tax</div>
+          <div class="token-row-pct">0%</div>
+        </div>
+        <div class="token-row">
+          <div class="token-dot" style="background:#fff;"></div>
+          <div class="token-row-label">Mint Authority</div>
+          <div class="token-row-pct">REVOKED</div>
+        </div>
+        <div class="token-row">
+          <div class="token-dot" style="background:#fff;"></div>
+          <div class="token-row-label">Freeze Authority</div>
+          <div class="token-row-pct">REVOKED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWEETS SECTION -->
+<section id="tweets">
+  <div class="section-inner">
+    <p class="section-tag reveal">🐦 From the Prophet's Mouth</p>
+    <h2 class="section-title reveal">RECENT <span>TWEETS</span></h2>
+    <p style="color:rgba(253,245,220,0.5); margin-bottom:40px; margin-top:-10px;" class="reveal">
+      Live dispatches from <strong style="color:var(--gold);">@SgtWingflapper</strong> — the voice of BOGE
+    </p>
+    <div class="section-divider reveal"></div>
+
+    <!-- Embedded Twitter Timeline for @SgtWingflapper -->
+    <div class="reveal" style="display:flex; justify-content:center; margin-bottom:30px;">
+      <a class="twitter-timeline"
+         data-theme="dark"
+         data-chrome="noheader nofooter noborders transparent"
+         data-tweet-limit="3"
+         data-width="700"
+         data-dnt="true"
+         href="https://twitter.com/SgtWingflapper">
+        Tweets by @SgtWingflapper
+      </a>
+    </div>
+
+    <!-- Placeholder cards if Twitter doesn't load -->
+    <div class="tweets-grid reveal" id="fallback-tweets">
+      <div class="tweet-card">
+        <div class="tweet-header">
+          <div class="tweet-avatar">🐕</div>
+          <div>
+            <div class="tweet-name">Sgt. Wingflapper</div>
+            <div class="tweet-handle">@SgtWingflapper</div>
+          </div>
+          <span class="tweet-x-logo">✕</span>
+        </div>
+        <div class="tweet-text">
+          The Book has been opened. <a href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">#BOGE</a> is not just a token — it's a calling. The prophecy runs deep. The bull horns never lie. 🐕📖🌕
+        </div>
+        <div class="tweet-footer">
+          <span>❤️ 420</span>
+          <span>🔄 69</span>
+          <span class="tweet-date">Follow for latest updates →</span>
+        </div>
+      </div>
+      <div class="tweet-card">
+        <div class="tweet-header">
+          <div class="tweet-avatar">🐕</div>
+          <div>
+            <div class="tweet-name">Sgt. Wingflapper</div>
+            <div class="tweet-handle">@SgtWingflapper</div>
+          </div>
+          <span class="tweet-x-logo">✕</span>
+        </div>
+        <div class="tweet-text">
+          Much wow. Such Solana. The ancient doge with horns of the bull walks among us. Do not miss the window, frens. <a href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">#BOGE</a> <a href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">#Solana</a> 🚀
+        </div>
+        <div class="tweet-footer">
+          <span>❤️ 777</span>
+          <span>🔄 333</span>
+          <span class="tweet-date">@SgtWingflapper</span>
+        </div>
+      </div>
+      <div class="tweet-card">
+        <div class="tweet-header">
+          <div class="tweet-avatar">🐕</div>
+          <div>
+            <div class="tweet-name">Sgt. Wingflapper</div>
+            <div class="tweet-handle">@SgtWingflapper</div>
+          </div>
+          <span class="tweet-x-logo">✕</span>
+        </div>
+        <div class="tweet-text">
+          I wrote it in the Book. You saw it here first. <a href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">$BOGE</a> is the chosen memecoin of this cycle. The horns of the bull point up. Always up. 🐂📈
+        </div>
+        <div class="tweet-footer">
+          <span>❤️ 1.2K</span>
+          <span>🔄 500</span>
+          <span class="tweet-date">@SgtWingflapper</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;" class="reveal">
+      <a class="btn btn-twitter" href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">
+        🐦 Follow @SgtWingflapper on X
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MEME GALLERY -->
+<section id="memes">
+  <div class="section-inner">
+    <p class="section-tag reveal">😂 Sacred Artifacts</p>
+    <h2 class="section-title reveal">THE MEME <span>VAULT</span></h2>
+    <div class="section-divider reveal"></div>
+    <div class="meme-scroll reveal">
+      <div class="meme-row">
+        <div class="meme-item" onclick="spawnEmoji(event,'🐕')">
+          <span>🐕</span><div class="meme-caption">MUCH WOW</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'📖')">
+          <span>📖</span><div class="meme-caption">THE BOOK</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'🌕')">
+          <span>🌕</span><div class="meme-caption">TO THE MOON</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'🐂')">
+          <span>🐂</span><div class="meme-caption">VERY BULL</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'💎')">
+          <span>💎</span><div class="meme-caption">DIAMOND PAWS</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'🚀')">
+          <span>🚀</span><div class="meme-caption">BOGE LAUNCH</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'⚡')">
+          <span>⚡</span><div class="meme-caption">SOLANA SPEED</div>
+        </div>
+        <div class="meme-item" onclick="spawnEmoji(event,'🏆')">
+          <span>🏆</span><div class="meme-caption">CHOSEN ONE</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center; color:var(--tan); margin-top:16px; font-size:0.85rem;" class="reveal">
+      👆 Click the memes. You know you want to.
+    </p>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="community-inner">
+    <img class="community-logo reveal" src="images/boge-logo.jpg" alt="BOGE Community" />
+    <p class="section-tag reveal" style="text-align:center;">🤝 Join the Pack</p>
+    <h2 class="section-title reveal" style="text-align:center;">JOIN THE <span>BOGE</span> ARMY</h2>
+    <div class="section-divider reveal" style="margin:20px auto 30px;"></div>
+    <p class="reveal" style="color:rgba(253,245,220,0.7); font-size:1.05rem; line-height:1.7; max-width:560px; margin:0 auto 30px;">
+      The prophecy is clear: only those who join the BOGE community before the moon will ascend. 
+      The Book of Doge has been sealed. Your fate, however, is still unwritten. Make the right choice, fren.
+    </p>
+    <div class="community-links reveal">
+      <a class="btn btn-primary" href="https://twitter.com/SgtWingflapper" target="_blank" rel="noopener">
+        🐦 Twitter / X
+      </a>
+      <a class="btn btn-secondary" href="https://dexscreener.com/solana/7apitysztd3qpd3r5fws9yjt6d3hcdt3xzggnyogvie8" target="_blank" rel="noopener">
+        📈 DexScreener
+      </a>
+      <a class="btn btn-secondary" href="https://pump.fun/coin/2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump" target="_blank" rel="noopener">
+        🔥 Pump.fun
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="images/boge-logo.jpg" alt="BOGE" style="width:48px;height:48px;border-radius:50%;border:2px solid #F5C518;margin-bottom:12px;vertical-align:middle;" />
+  <p style="margin-bottom:8px;">
+    <strong style="color:var(--gold);">BOGE</strong> — The Book of Doge &nbsp;|&nbsp;
+    CA: <a href="https://dexscreener.com/solana/7apitysztd3qpd3r5fws9yjt6d3hcdt3xzggnyogvie8">2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump</a>
+  </p>
+  <p>Built on ⚡ Solana &nbsp;|&nbsp; Community-driven, no team tokens, no promises.</p>
+  <p style="margin-top:12px; font-size:0.75rem; opacity:0.4;">
+    This site is for entertainment only. Crypto investments carry risk. Do your own research. 
+    Much disclaimer. Very legal. Such compliance.
+  </p>
+</footer>
+
+<script>
+/* ── STAR FIELD ── */
+(function() {
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 200; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 3 + 1;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --dur:${(Math.random()*4+2).toFixed(1)}s;
+      --op:${(Math.random()*0.8+0.2).toFixed(2)};
+      animation-delay:${(Math.random()*5).toFixed(1)}s;
+    `;
+    c.appendChild(s);
+  }
+})();
+
+/* ── COPY CA ── */
+function copyCA(btn) {
+  const ca = '2ZvFgTyLMrgyLmoPHtD5KsTyALh14ffzxJoni4oPpump';
+  navigator.clipboard.writeText(ca).then(() => {
+    btn.textContent = '✓ COPIED!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = btn.textContent.includes('COPY') ? 'COPY CA' : 'COPY';
+      btn.classList.remove('copied');
+      btn.textContent = 'COPY CA';
+    }, 2000);
+  });
+}
+
+/* ── SPAWN EMOJI ON CLICK ── */
+function spawnEmoji(e, emoji) {
+  for (let i = 0; i < 5; i++) {
+    const el = document.createElement('div');
+    el.className = 'bouncer';
+    el.textContent = emoji;
+    const delay = i * 100;
+    const offset = (Math.random() - 0.5) * 80;
+    el.style.cssText = `
+      left:${e.clientX + offset}px;
+      top:${e.clientY}px;
+      --t:${(0.8 + Math.random() * 0.6).toFixed(1)}s;
+      animation-delay:${delay}ms;
+      font-size:${(1.5 + Math.random() * 2).toFixed(1)}rem;
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1500 + delay);
+  }
+}
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── COUNTER ANIMATION ── */
+function animateCount(el, target, suffix) {
+  let start = 0;
+  const dur = 2000;
+  const step = 16;
+  const inc = target / (dur / step);
+  const timer = setInterval(() => {
+    start += inc;
+    if (start >= target) {
+      start = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(start).toLocaleString() + suffix;
+  }, step);
+}
+
+/* ── NAVBAR ACTIVE SECTION HIGHLIGHT ── */
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  links.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+}, { passive: true });
+</script>
+
+</body>
+</html>
